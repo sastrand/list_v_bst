@@ -1,3 +1,6 @@
+## NB Algorithms: Data Structures 
+### Lab I of II
+
 Time how long it takes to accept or reject each IP address in the traffic file when the white list is stored in:
    * An unsorted list
    * A binary search tree built from an unsorted list   
