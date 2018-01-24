@@ -1,7 +1,20 @@
-For each IP address in the traffic file, time how long it takes to accept or reject each one:
-    * In an unsorted list
-    * In a binary search tree built from an unsorted list
-If there's time, sort the input files and time how long it takes to accept or reject each one:
-    * In a sorted list
-    * In a binary search tree built from a sorted list
+## NB Algorithms: Data Structures 
+### Lab I of II
 
+Time how long it takes to accept or reject each IP address in the traffic file when the white list is stored in:
+   * An unsorted list
+   * A binary search tree built from an unsorted list   
+   
+If there's time during lab, sort the input files and time how long it takes to accept or reject each IP address in the traffic file when the white list is stored in:
+   * A sorted list
+   * A binary search tree built from a sorted list
+
+In the data directory are four files of IP addresses:
+   * `traffic.txt` contains 1,048,576 IP address
+   * `whitelist.txt` contains 1024 IP addresses
+   * `traffic_test.txt` contains 16 IP addresses
+   * `whitelist_test.txt` contains 4 IP addresses
+   
+These should be sufficient to see some interesting results, but you can use the `gen_ip.py` script to generate more or different files. Its command-line parameters are described in the comments at the top of the file.
+
+For this lab, implement `firewall.py`.
