@@ -14,7 +14,7 @@ class BST(object):
         self.right = None
 
     def __str__(self):
-        return '({}, {}, {})'.format(self.l, self.val, self.r)
+        return '({}, {}, {})'.format(self.left, self.val, self.right)
 
     def insert(self, val_in):
         if val_in == self.val:
@@ -49,7 +49,7 @@ def ip_reader(fp):
     buf = fp.readlines()
     ret = []
     for ip in buf:
-        ret.append(ip)
+        ret.append(ip.rstrip())
     return ret
 
 
@@ -88,10 +88,10 @@ def time_set(traf, wl):
 
 if __name__ == "__main__":
 
-    with open("./data/traffic.txt", 'r') as f:
+    with open("./data/traffic_test.txt", 'r') as f:
         traf = ip_reader(f)
 
-    with open("./data/whitelist.txt", 'r') as f:
+    with open("./data/whitelist_test.txt", 'r') as f:
         wl = ip_reader(f)
 
     time_list(traf, wl)
