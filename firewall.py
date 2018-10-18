@@ -16,10 +16,10 @@ class BST(object):
     def __str__(self):
         return '({}, {}, {})'.format(self.left, self.val, self.right)
 
-    def insert(self, val_in):
+    def insert(self, val):
         pass
 
-    def search(self, val_in):
+    def search(self, val):
         pass
 
 
