@@ -17,7 +17,8 @@ class BST(object):
         return '({}, {}, {})'.format(self.l, self.val, self.r)
 
     def insert(self, val_in):
-        if val_in == self.val: return
+        if val_in == self.val:
+            return
         if val_in < self.val:
             if self.left:
                 self.left.insert(val_in)
@@ -30,7 +31,8 @@ class BST(object):
                 self.right = BST(val_in)
 
     def search(self, val_in):
-        if val_in == self.val: return True
+        if val_in == self.val:
+            return True
         if val_in < self.val:
             if self.left:
                 return self.left.search(val_in)
@@ -51,41 +53,47 @@ def ip_reader(fp):
     return ret
 
 
-with open("./data/traffic.txt", 'r') as f:
-    traf = ip_reader(f)
+def time_list(traf, wl):
+    t0 = time()
+    ret = 0
+    for ip in traf:
+        if ip in wl:
+            ret += 1
+    t1 = time()
+    print("IPs matches in list: {}. Time: {} seconds".format(ret, t1 - t0))
 
-with open("./data/whitelist.txt", 'r') as f:
-    wl = ip_reader(f)
 
-t0 = time()
-ret = 0
-for ip in traf:
-    if ip in wl:
-        ret += 1
-t1 = time()
+def time_bst(traf, wl):
+    root = BST(wl[0])
+    [root.insert(x) for x in wl]
+    t2 = time()
+    ret = 0
+    for ip in traf:
+        if root.search(ip):
+            ret += 1
+    t3 = time()
+    print("IPs matched in tree: {}. Time: {} seconds".format(ret, t3 - t2))
 
-print("IPs matches in list: {}. Time: {} seconds".format(ret, t1 - t0))
 
-root = BST(wl[0])
-[root.insert(x) for x in wl]
+def time_set(traf, wl):
+    wl_set = set(wl)
+    t4 = time()
+    ret = 0
+    for ip in traf:
+        if ip in wl_set:
+            ret += 1
+    t5 = time()
+    print("IPs matched in set:  {}. Time: {} seconds".format(ret, t5 - t4))
 
-t2 = time()
-ret = 0
-for ip in traf:
-    if root.search(ip):
-        ret += 1
-t3 = time()
 
-print("IPs matched in tree: {}. Time: {} seconds".format(ret, t3 - t2))
+if __name__ == "__main__":
 
-# Code block to time set
-# var wl_set is the whitelist as a Python set
-wl_set = set(wl)
-t4 = time()
-ret = 0
-for ip in traf:
-    if ip in wl_set:
-        ret += 1
-t5 = time()
+    with open("./data/traffic.txt", 'r') as f:
+        traf = ip_reader(f)
 
-print("IPs matched in set:  {}. Time: {} seconds".format(ret, t5 - t4))
+    with open("./data/whitelist.txt", 'r') as f:
+        wl = ip_reader(f)
+
+    time_list(traf, wl)
+    time_bst(traf, wl)
+    time_set(traf, wl)
